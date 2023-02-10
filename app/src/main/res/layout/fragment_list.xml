@@ -10,18 +10,21 @@
         android:id="@+id/toggleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/button1"
-            style="?attr/materialButtonOutlinedStyle"
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:text="categories"
-            />
+            android:text="categories" />
 
         <Button
             android:id="@+id/button2"
             style="?attr/materialButtonOutlinedStyle"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:layout_width="135dp"
             android:layout_height="wrap_content"
             android:text="Ingredient" />
@@ -29,6 +32,8 @@
         <Button
             android:id="@+id/button3"
             style="?attr/materialButtonOutlinedStyle"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:layout_width="135dp"
             android:layout_height="wrap_content"
             android:text="country" />

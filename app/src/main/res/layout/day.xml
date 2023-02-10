@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:background="#F5F5F5"
         android:backgroundTint="#F5F5F5"
-        android:fontFamily="@font/inknut_antiqua_light"
         android:text="Saturday"
         android:textAlignment="center"
         android:textColor="#DB9C72"

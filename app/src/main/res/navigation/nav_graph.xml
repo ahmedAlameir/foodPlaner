@@ -20,4 +20,14 @@
         android:name="com.example.foodplaner.Favourite.FavouriteFragment"
         android:label="fragment_favourite"
         tools:layout="@layout/fragment_favourite" />
+    <fragment
+        android:id="@+id/allMealsFragment"
+        android:name="com.example.foodplaner.AllMeals.View.AllMealsFragment"
+        android:label="fragment_all_meals"
+        tools:layout="@layout/fragment_all_meals" />
+    <fragment
+        android:id="@+id/myPlanFragment"
+        android:name="com.example.foodplaner.MyPlan.View.MyPlanFragment"
+        android:label="fragment_my_plan"
+        tools:layout="@layout/fragment_my_plan" />
 </navigation>
