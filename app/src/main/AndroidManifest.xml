@@ -19,11 +19,7 @@
         <activity
             android:name=".MealMainScreen.MealMainScreenActivity"
             android:exported="false" />
-        <activity
-            android:name=".MealMainScreen"
-            android:exported="false"
-            android:label="@string/title_activity_meal_main_screen"
-            android:theme="@style/Theme.FoodPlaner.NoActionBar" />
+
 
         <activity
             android:name=".MainActivity"

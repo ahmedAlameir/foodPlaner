@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.FoodPlaner.NoActionBa" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
 
     <style name="Theme.NavDrawerTest.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
