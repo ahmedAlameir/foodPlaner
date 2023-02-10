@@ -1,4 +1,4 @@
-package com.example.foodplaner.List;
+package com.example.foodplaner.Favourite.screen;
 
 import android.os.Bundle;
 
@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.foodplaner.R;
 
-
-public class ListFragment extends Fragment {
+public class FavouriteFragment extends Fragment implements FavouriteInterface{
 
 
 
@@ -25,6 +24,6 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        return inflater.inflate(R.layout.fragment_favourite, container, false);
     }
 }

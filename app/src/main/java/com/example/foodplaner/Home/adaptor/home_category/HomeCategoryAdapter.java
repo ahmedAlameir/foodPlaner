@@ -18,6 +18,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
 
     public HomeCategoryAdapter(List<String> data,HomePresenter presenter) {
         this.data = data;
+        presenter = presenter;
     }
 
 
