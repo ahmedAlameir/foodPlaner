@@ -1,4 +1,4 @@
-package com.example.foodplaner.Home;
+package com.example.foodplaner.Home.screen;
 
 import android.os.Bundle;
 
