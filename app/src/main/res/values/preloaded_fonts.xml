@@ -2,9 +2,11 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/inknut_antiqua_light</item>
+        <item>@font/inria_serif</item>
         <item>@font/inria_serif_light</item>
         <item>@font/inter</item>
         <item>@font/inter_bold</item>
         <item>@font/inter_semibold</item>
+        <item>@font/irish_grover</item>
     </array>
 </resources>

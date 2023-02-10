@@ -8,11 +8,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.foodplaner.AllMeals.View.AllMealsFragment;
-import com.example.foodplaner.MyPlan.View.MyPlanAdapter;
+import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
 import com.example.foodplaner.MyPlan.View.MyPlanFragment;
 
 
@@ -40,4 +40,5 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
     }
+
 }
