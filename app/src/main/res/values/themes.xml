@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FoodPlaner" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.FoodPlaner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/orenge</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -14,12 +14,19 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.FoodPlaner.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="Theme.NavDrawerTest.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.NavDrawerTest.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="life_is_inf">
+
+        <item name="android:textSize">
+            24sp
+        </item>
+
+        <item name="android:textColor">
+            #000000
+        </item>
+
     </style>
 
-    <style name="Theme.FoodPlaner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.FoodPlaner.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
