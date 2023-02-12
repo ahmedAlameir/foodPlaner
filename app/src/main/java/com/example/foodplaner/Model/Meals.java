@@ -3,18 +3,18 @@ package com.example.foodplaner.Model;
 import java.util.ArrayList;
 
 public class Meals {
-    ArrayList<Meal> Meals;
+    ArrayList<Meal> meals;
 
     public ArrayList<Meal> getMeals() {
-        return Meals;
+        return meals;
     }
 
-    public void setMeals(ArrayList<Meal> meals) {
-        Meals = meals;
+    public void setMeals(ArrayList<Meal> _meals) {
+        meals = _meals;
     }
 
-    public Meals(ArrayList<Meal> meals) {
-        Meals = meals;
+    public Meals(ArrayList<Meal> _meals) {
+        meals = _meals;
     }
     public Meals(){}
 }
