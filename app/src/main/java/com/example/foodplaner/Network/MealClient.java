@@ -4,8 +4,10 @@ import static com.example.foodplaner.Network.APIInterface.BASE_URL;
 
 import android.util.Log;
 
+import com.example.foodplaner.Model.Categories;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Model.Meals;
+import com.example.foodplaner.Network.CallBack.CategoriesCallBack;
 import com.example.foodplaner.Network.CallBack.RandomMealCallBack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,7 +25,14 @@ public class MealClient implements RemoteDataInterface{
     private static MealClient INSTANCE = null;
     private APIInterface apiInterface;
 
-    public MealClient(){}
+    public MealClient(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build();
+        apiInterface = retrofit.create(APIInterface.class);
+    }
 
     public static MealClient getINSTANCE() {
         if (INSTANCE == null) {
@@ -35,12 +44,7 @@ public class MealClient implements RemoteDataInterface{
 
     @Override
     public void getData(NetworkDelegate networkDelegate) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
-        apiInterface = retrofit.create(APIInterface.class);
+
         Single<Meals> observable = apiInterface.getMeals()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -51,17 +55,34 @@ public class MealClient implements RemoteDataInterface{
     }
     @Override
     public void getRandomMeal(RandomMealCallBack randomMealCallBack) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
-        apiInterface = retrofit.create(APIInterface.class);
-       Observable<Meal> observable = apiInterface.getRandomMeal()
+
+       Observable<Meals> observable = apiInterface.getRandomMeal()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
-        observable.subscribe(item->randomMealCallBack.callBack(item));
+        observable.subscribe(item->
+                {
+                    randomMealCallBack.callBack(item);
 
+                },
+                throwable -> {
+            Log.i(TAG, "getRandomMeal: "+throwable.getMessage());
+        });
+
+    }
+
+    @Override
+    public void getCategories(CategoriesCallBack callBack) {
+        Observable<Categories> observable = apiInterface.getCategories()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        observable.subscribe(item->
+                {
+                    callBack.callBack(item);
+                },
+                throwable -> {
+                    Log.i(TAG, "getRandomMeal: "+throwable.getMessage());
+                });
     }
 }

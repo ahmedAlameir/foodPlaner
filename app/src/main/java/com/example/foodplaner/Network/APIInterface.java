@@ -1,5 +1,6 @@
 package com.example.foodplaner.Network;
 
+import com.example.foodplaner.Model.Categories;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Model.Meals;
 
@@ -15,6 +16,8 @@ public interface APIInterface {
     public Single<Meals> getMeals();
 
     @GET("random.php")
-    Observable<Meal> getRandomMeal();
+    Observable<Meals> getRandomMeal();
 
+    @GET("categories.php")
+    Observable<Categories> getCategories();
 }

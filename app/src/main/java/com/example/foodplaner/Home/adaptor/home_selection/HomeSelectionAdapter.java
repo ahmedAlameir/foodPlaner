@@ -1,26 +1,30 @@
 package com.example.foodplaner.Home.adaptor.home_selection;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodplaner.Home.screen.HomePresenter;
+import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.R;
 import com.example.foodplaner.databinding.HomeCatagoryItemBinding;
 import com.example.foodplaner.databinding.HomeSelectionItemBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeSelectionAdapter extends RecyclerView.Adapter<HomeSelectionAdapter.SelectionViewHolder> {
 
-    private List<String> data;
+    private List<Meal> data;
     HomePresenter presenter;
 
-    public HomeSelectionAdapter(List<String> data,HomePresenter presenter) {
-        this.data = data;
-        presenter = presenter;
-
+    public HomeSelectionAdapter(HomePresenter presenter) {
+        this.presenter = presenter;
+        data = new ArrayList<>();
     }
 
 
@@ -28,10 +32,14 @@ public class HomeSelectionAdapter extends RecyclerView.Adapter<HomeSelectionAdap
 
     @Override
     public void onBindViewHolder(@NonNull SelectionViewHolder holder, int position) {
-        String item = data.get(position);
+        Meal item = data.get(position);
         holder.bind(item);
     }
 
+    public void setList(List<Meal> meal){
+        this.data = meal;
+        notifyDataSetChanged();
+    }
 
 
     @NonNull
@@ -56,7 +64,14 @@ public class HomeSelectionAdapter extends RecyclerView.Adapter<HomeSelectionAdap
 
         }
 
-        public void bind(String item) {
+        public void bind(Meal item) {
+            binding.areaName.setText(item.strArea);
+            binding.foodName.setText(item.strMeal);
+            binding.typeName.setText(item.strCategory);
+            Glide.with(presenter.getContext())
+                    .load(item.strMealThumb)
+                    .error(R.drawable.wqurxy1511453156)
+                    .into(binding.foodImage);
             binding.getRoot().setOnClickListener(v -> {presenter.onSelectionClick(item);});
         }
     }

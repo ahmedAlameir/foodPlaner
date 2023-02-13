@@ -5,6 +5,8 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 
 import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.Network.CallBack.CategoriesCallBack;
+import com.example.foodplaner.Network.CallBack.RandomMealCallBack;
 import com.example.foodplaner.Network.NetworkDelegate;
 import com.example.foodplaner.Network.RemoteDataInterface;
 
@@ -42,6 +44,13 @@ public class Repository implements RepositoryInterface{
     @Override
     public void getAllMeals(NetworkDelegate networkDelegate) {
             remote.getData(networkDelegate);
+    }
+
+    public void getRandomMeal(RandomMealCallBack callBack){
+        remote.getRandomMeal(callBack);
+    }
+    public void geCategories(CategoriesCallBack callBack){
+        remote.getCategories(callBack);
     }
 
     @Override

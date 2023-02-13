@@ -1,24 +1,30 @@
 package com.example.foodplaner.Home.adaptor.home_category;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodplaner.Home.screen.HomePresenter;
+import com.example.foodplaner.Model.Category;
+import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.R;
 import com.example.foodplaner.databinding.HomeCatagoryItemBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapter.CategoryViewHolder> {
 
-    private List<String> data;
+    private List<Category> data;
     HomePresenter presenter;
 
-    public HomeCategoryAdapter(List<String> data,HomePresenter presenter) {
-        this.data = data;
-        presenter = presenter;
+    public HomeCategoryAdapter(HomePresenter presenter) {
+       this.presenter = presenter;
+       data = new ArrayList<>();
     }
 
 
@@ -26,11 +32,14 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        String item = data.get(position);
+        Category item = data.get(position);
         holder.bind(item);
     }
 
-
+    public void setList(List<Category> categories){
+        data =categories;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -54,9 +63,13 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
 
         }
 
-        public void bind(String item) {
-            binding.textView.setText(item);
-            binding.getRoot().setOnClickListener(v -> {presenter.onCategoryClick(item);});
+        public void bind(Category item) {
+            binding.textView.setText(item.getStrCategory());
+            Glide.with(presenter.getContext())
+                    .load(item.getStrCategoryThumb())
+                    .error(R.drawable.beef)
+                    .into(binding.imageView);
+            binding.getRoot().setOnClickListener(v -> {presenter.onCategoryClick(item.getStrCategory());});
         }
     }
 }
