@@ -38,8 +38,8 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
-    public void getAllMeals(NetworkDelegate networkDelegate) {
-            remote.getData(networkDelegate);
+    public void getAllMeals(NetworkDelegate networkDelegate, String l) {
+            remote.getData(networkDelegate,l);
     }
 
     @Override

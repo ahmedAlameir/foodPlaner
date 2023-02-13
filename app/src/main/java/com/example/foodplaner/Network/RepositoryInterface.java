@@ -9,7 +9,7 @@ import java.util.List;
 public interface RepositoryInterface {
     public void insertMeal(Meal meal);
     public void deleteMeal(Meal meal);
-    public void getAllMeals(NetworkDelegate networkDelegate);
+    public void getAllMeals(NetworkDelegate networkDelegate, String l);
     public LiveData<List<Meal>> getStoredMeals();
 
 }

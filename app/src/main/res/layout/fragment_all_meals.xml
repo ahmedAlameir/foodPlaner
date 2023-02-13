@@ -45,12 +45,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/allmeals_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="10"
+            android:hint="Search for a meal"
             android:inputType="textPersonName"
-            android:text="Search for a meal"
             android:textSize="16sp" />
     </androidx.cardview.widget.CardView>
 
@@ -65,7 +65,17 @@
 
         <SearchView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#090909"
+            android:backgroundTint="#FFFCFC">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="43dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/search_icon" />
+        </SearchView>
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView

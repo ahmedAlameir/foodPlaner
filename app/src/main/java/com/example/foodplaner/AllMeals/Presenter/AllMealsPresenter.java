@@ -17,8 +17,8 @@ public class AllMealsPresenter implements AllMealPresenterInterface, NetworkDele
     }
 
     @Override
-    public void getMeals() {
-        _repo.getAllMeals(this);
+    public void getMeals(String l) {
+        _repo.getAllMeals(this,l);
 
 
     }
