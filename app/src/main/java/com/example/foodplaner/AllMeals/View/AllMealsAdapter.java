@@ -16,10 +16,11 @@ import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyViewHolder>{
     Context context;
-    ArrayList<Meal> meals;
+    List<Meal> meals;
     OnPlanClickListener onPlanClickListener;
     OnFavouriteClickListener onFavouriteClickListener;
     public  AllMealsAdapter(OnFavouriteClickListener onFavouriteClickListener,OnPlanClickListener onPlanClickListener){
@@ -27,7 +28,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
         this.onPlanClickListener=onPlanClickListener;
         meals=new ArrayList<>();
     }
-    public void setMeals(ArrayList<Meal> meals) {
+    public void setMeals(List<Meal> meals) {
         this.meals = meals;
     }
     @NonNull
