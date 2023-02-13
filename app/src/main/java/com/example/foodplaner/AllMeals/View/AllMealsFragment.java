@@ -12,7 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.foodplaner.AllMeals.Presenter.AllMealPresenterInterface;
+import com.example.foodplaner.AllMeals.Presenter.AllMealsPresenter;
 import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.Network.MealClient;
+import com.example.foodplaner.rebo.Repository;
 import com.example.foodplaner.R;
 
 import java.util.ArrayList;
@@ -21,13 +25,13 @@ import java.util.ArrayList;
 public class AllMealsFragment extends Fragment implements AllMealViewInterface,OnFavouriteClickListener,OnPlanClickListener {
 
     AllMealsAdapter adapter;
-    Meal meal=new Meal("koshary","Egyption");
     ArrayList<Meal> meals=new ArrayList<>();
+    AllMealPresenterInterface allMealPresenterInterface;
 
 
 
     public AllMealsFragment() {
-        meals.add(meal);
+
 
     }
 
@@ -55,14 +59,18 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
         RecyclerView recyclerView = view.findViewById(R.id.rv_allmeals);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter=new AllMealsAdapter(AllMealsFragment.this,AllMealsFragment.this);
+        allMealPresenterInterface =new AllMealsPresenter(this,
+                Repository.getInstance( MealClient.getINSTANCE(),getContext()));
         recyclerView.setAdapter(adapter);
-        adapter.setMeals(meals);
-        adapter.notifyDataSetChanged();
+        allMealPresenterInterface.getMeals();
+
 
     }
 
     @Override
     public void showData(ArrayList<Meal> meals) {
+        adapter.setMeals(meals);
+        adapter.notifyDataSetChanged();
 
     }
 
