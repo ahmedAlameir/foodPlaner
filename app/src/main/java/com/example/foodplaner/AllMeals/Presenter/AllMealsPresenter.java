@@ -3,7 +3,7 @@ package com.example.foodplaner.AllMeals.Presenter;
 import com.example.foodplaner.AllMeals.View.AllMealViewInterface;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Network.NetworkDelegate;
-import com.example.foodplaner.Network.RepositoryInterface;
+import com.example.foodplaner.rebo.RepositoryInterface;
 
 import java.util.ArrayList;
 

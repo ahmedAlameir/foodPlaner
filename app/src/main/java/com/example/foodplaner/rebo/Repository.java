@@ -1,10 +1,12 @@
-package com.example.foodplaner.Network;
+package com.example.foodplaner.rebo;
 
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.Network.NetworkDelegate;
+import com.example.foodplaner.Network.RemoteDataInterface;
 
 import java.util.List;
 

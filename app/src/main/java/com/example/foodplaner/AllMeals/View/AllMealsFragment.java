@@ -16,7 +16,7 @@ import com.example.foodplaner.AllMeals.Presenter.AllMealPresenterInterface;
 import com.example.foodplaner.AllMeals.Presenter.AllMealsPresenter;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Network.MealClient;
-import com.example.foodplaner.Network.Repository;
+import com.example.foodplaner.rebo.Repository;
 import com.example.foodplaner.R;
 
 import java.util.ArrayList;
