@@ -15,4 +15,5 @@ public interface APIInterface {
     @GET("search.php")
     public Single<Meals> getMeals(@Query("f") String letter);
 
+
 }

@@ -5,14 +5,16 @@
     android:layout_height="wrap_content"
     android:backgroundTint="#F5F5F5"
     app:cardBackgroundColor="#F5F5F5"
-    app:cardCornerRadius="40dp"
+    app:cardCornerRadius="15dp"
     app:cardElevation="10dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    app:rippleColor="#F5F5F5"
+    app:strokeColor="#F5F5F5">
 
     <TextView
         android:id="@+id/daytv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#F5F5F5"
         android:backgroundTint="#F5F5F5"
         android:text="Saturday"

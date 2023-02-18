@@ -100,4 +100,13 @@
     <string name="title_list">list</string>
     <string name="title_notifications">notifications</string>
     <string name="life_is_inf">life is infinitely\n      delicious!</string>
+    <string-array name="choice_items">
+        <item>Saturday</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thurasday</item>
+        <item>Friday</item>
+    </string-array>
 </resources>

@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'androidx.navigation.safeargs'
-   // id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
+    // id 'com.google.gms.google-services'
 
 }
 
@@ -30,13 +31,16 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildFeatures {
+        dataBinding true
         viewBinding true
+
     }
 }
 
 dependencies {
 
     implementation 'com.android.car.ui:car-ui-lib:2.0.0'
+    implementation files('libs\\YouTubeAndroidPlayerApi.jar')
     def room_version = "2.5.0"
     def lottieVersion = "3.4.0"
     //lottie
@@ -48,6 +52,7 @@ dependencies {
     //room
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava3:$room_version"
     //navigation
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
@@ -75,6 +80,10 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+    //video
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
+
+
 
 
 }
