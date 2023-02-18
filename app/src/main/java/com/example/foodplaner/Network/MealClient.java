@@ -2,6 +2,8 @@ package com.example.foodplaner.Network;
 
 import static com.example.foodplaner.Network.APIInterface.BASE_URL;
 
+
+
 import android.util.Log;
 
 import com.example.foodplaner.Model.Meal;
@@ -20,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MealClient implements RemoteDataInterface{
     private static final String TAG = "MealClient";
+    static String letter;
     private static MealClient INSTANCE = null;
     private APIInterface apiInterface;
 
@@ -34,18 +37,24 @@ public class MealClient implements RemoteDataInterface{
     }
 
     @Override
-    public void getData(NetworkDelegate networkDelegate) {
+
+    public void getData(NetworkDelegate networkDelegate,String l) {
+        letter="a";
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
         apiInterface = retrofit.create(APIInterface.class);
-        Single<Meals> observable = apiInterface.getMeals()
+
+        Single<Meals> observable = apiInterface.getMeals(l)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
-        observable.subscribe(item->networkDelegate.getData(item.getMeals()),
+        observable.subscribe(item->{if(item.getMeals()!=null)
+                    networkDelegate.getData(item.getMeals());}
+                        ,
                 e-> Log.i("TAG","elmoshkela : "+e.getMessage()));
 
     }

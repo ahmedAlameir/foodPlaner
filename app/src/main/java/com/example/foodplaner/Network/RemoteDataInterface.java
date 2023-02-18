@@ -7,5 +7,6 @@ public interface RemoteDataInterface {
 
     public void getRandomMeal(RandomMealCallBack randomMealCallBack);
 
+    void getData(NetworkDelegate networkDelegate, String l);
 
 }

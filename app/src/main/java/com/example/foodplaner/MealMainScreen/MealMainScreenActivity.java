@@ -1,49 +1,221 @@
 package com.example.foodplaner.MealMainScreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodplaner.AllMeals.View.AllMealsAdapter;
 import com.example.foodplaner.AllMeals.View.AllMealsFragment;
 import com.example.foodplaner.Model.Ingredient;
+import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.R;
+import com.example.foodplaner.databinding.ActivityMealMainScreenBinding;
+import com.google.android.youtube.player.YouTubeApiServiceUtil;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class MealMainScreenActivity extends AppCompatActivity {
+    private ActivityMealMainScreenBinding binding;
     MealMainScreenAdapter adapter;
-    ArrayList<Ingredient> ingredients=new ArrayList<>();
-    Ingredient ingredient=new Ingredient("potatoes","3 large","https://www.themealdb.com/images/ingredients/Potatoes.png");
-    Ingredient ingredient2=new Ingredient("potatoes","3 large","https://www.themealdb.com/images/ingredients/Potatoes.png");
-    Ingredient ingredient3=new Ingredient("potatoes","3 large","https://www.themealdb.com/images/ingredients/Potatoes.png");
-    Ingredient ingredient4=new Ingredient("potatoes","3 large","https://www.themealdb.com/images/ingredients/Potatoes.png");
-    Ingredient ingredient5=new Ingredient("potatoes","3 large","https://www.themealdb.com/images/ingredients/Potatoes.png");
-    Ingredient ingredient6=new Ingredient("potatoes","3 large","https://www.themealdb.com/images/ingredients/Potatoes.png");
+    ArrayList<Ingredient> ingredients = new ArrayList<>();
+    Meal meal;
+    ImageView mealImg;
+    TextView mealName;
+    TextView mealArea;
+    TextView Instructions;
+    YouTubePlayerView mealVideo;
+
+    Ingredient ingredient;
+    String ingrdient_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding= ActivityMealMainScreenBinding.inflate(getLayoutInflater());
+        //setContentView(binding.nestedScrollView.findViewById(R.id.nestedScrollView));
         setContentView(R.layout.activity_meal_main_screen);
         RecyclerView recyclerView = findViewById(R.id.rv_ingredient);
-        ingredients.add(ingredient);
-        ingredients.add(ingredient2);
-        ingredients.add(ingredient3);
-        ingredients.add(ingredient4);
-        ingredients.add(ingredient5);
-        ingredients.add(ingredient6);
+        mealImg = findViewById(R.id.meal_img);
+        mealName = findViewById(R.id.meal_name);
+        mealArea = findViewById(R.id.meal_area);
+        mealVideo=findViewById(R.id.meal_video);
+        Instructions = findViewById(R.id.instructionbody);
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            meal = (Meal) extras.getSerializable("MEAL");
+        }
+        final String[] VideoUrl = {meal.getStrYoutube()};
+        mealVideo.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                super.onReady(youTubePlayer);
+                if(VideoUrl[0] !=null){
+                    VideoUrl[0] = VideoUrl[0].substring(VideoUrl[0].indexOf("=") + 1);
+                    StringTokenizer st = new StringTokenizer(VideoUrl[0], "&");
+                    VideoUrl[0] = st.nextToken();
+                    youTubePlayer.loadVideo(VideoUrl[0],0);
+                    youTubePlayer.pause();
+                }
+            }
+        });
 
 
 
+
+        mealName.setText(meal.getStrMeal());
+        mealArea.setText(meal.getStrArea());
+        Instructions.setText(meal.getStrInstructions());
+        Glide.with(this).load(meal.getStrMealThumb()).into(mealImg);
+
+        fillIngredients(meal);
+        Log.i("TAG", "size= " + ingredients.size());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(MealMainScreenActivity.this));
-        adapter=new MealMainScreenAdapter();
+        adapter = new MealMainScreenAdapter();
         recyclerView.setAdapter(adapter);
         adapter.setMeals(ingredients);
         adapter.notifyDataSetChanged();
 
+    }
+
+    public void fillIngredients(Meal meal) {
+
+        if (meal.getStrIngredient1() != null&& !meal.getStrIngredient1().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient1());
+            ingredient = new Ingredient(meal.getStrIngredient1(), meal.getStrMeasure1(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient2() != null&& !meal.getStrIngredient2().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient2());
+            ingredient = new Ingredient(meal.getStrIngredient2(), meal.getStrMeasure2(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient3() != null&& !meal.getStrIngredient3().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient3());
+            ingredient = new Ingredient(meal.getStrIngredient3(), meal.getStrMeasure3(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient4() != null&& !meal.getStrIngredient4().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient4());
+            ingredient = new Ingredient(meal.getStrIngredient4(), meal.getStrMeasure4(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient5() != null&& !meal.getStrIngredient5().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient5());
+            ingredient = new Ingredient(meal.getStrIngredient5(), meal.getStrMeasure5(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient6() != null&& !meal.getStrIngredient6().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient6());
+            ingredient = new Ingredient(meal.getStrIngredient6(), meal.getStrMeasure6(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient7() != null&& !meal.getStrIngredient7().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient7());
+            ingredient = new Ingredient(meal.getStrIngredient7(), meal.getStrMeasure7(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient8() != null&& !meal.getStrIngredient8().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient8());
+            ingredient = new Ingredient(meal.getStrIngredient8(), meal.getStrMeasure8(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient9() != null&& !meal.getStrIngredient9().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient9());
+            ingredient = new Ingredient(meal.getStrIngredient9(), meal.getStrMeasure9(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient10() != null&& !meal.getStrIngredient10().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient10());
+            ingredient = new Ingredient(meal.getStrIngredient10(), meal.getStrMeasure10(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient11() != null&& !meal.getStrIngredient11().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient11());
+            ingredient = new Ingredient(meal.getStrIngredient11(), meal.getStrMeasure11(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient12() != null&& !meal.getStrIngredient12().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient12());
+            ingredient = new Ingredient(meal.getStrIngredient12(), meal.getStrMeasure12(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient13() != null&& !meal.getStrIngredient13().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient13());
+            ingredient = new Ingredient(meal.getStrIngredient13(), meal.getStrMeasure13(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient14() != null&& !meal.getStrIngredient14().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient14());
+            ingredient = new Ingredient(meal.getStrIngredient14(), meal.getStrMeasure14(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient15() != null&& !meal.getStrIngredient15().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient15());
+            ingredient = new Ingredient(meal.getStrIngredient15(), meal.getStrMeasure15(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient16() != null && !meal.getStrIngredient16().isEmpty()) {
+                ingrdient_img = new String();
+                ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient16());
+                ingredient = new Ingredient(meal.getStrIngredient16(), meal.getStrMeasure16(), ingrdient_img);
+                ingredients.add(ingredient);
+
+        }
+        if (meal.getStrIngredient17() != null&& !meal.getStrIngredient17().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient17());
+            ingredient = new Ingredient(meal.getStrIngredient17(), meal.getStrMeasure17(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient18() != null&& !meal.getStrIngredient18().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient18());
+            ingredient = new Ingredient(meal.getStrIngredient18(), meal.getStrMeasure18(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient19() != null&& !meal.getStrIngredient19().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient19());
+            ingredient = new Ingredient(meal.getStrIngredient19(), meal.getStrMeasure19(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
+        if (meal.getStrIngredient20() != null&& !meal.getStrIngredient20().isEmpty()) {
+            ingrdient_img = new String();
+            ingrdient_img = String.format("https://www.themealdb.com/images/ingredients/%s-Small.png", meal.getStrIngredient20());
+            ingredient = new Ingredient(meal.getStrIngredient20(), meal.getStrMeasure20(), ingrdient_img);
+            ingredients.add(ingredient);
+        }
     }
 }
