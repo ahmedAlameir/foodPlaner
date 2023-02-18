@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.MyPlan.View.MyPlanViewInterface;
-import com.example.foodplaner.Network.RepositoryInterface;
+import com.example.foodplaner.rebo.RepositoryInterface;
 
 public class MyPlanPresenter implements MyPlanPresenterInterface{
     private RepositoryInterface _repo;

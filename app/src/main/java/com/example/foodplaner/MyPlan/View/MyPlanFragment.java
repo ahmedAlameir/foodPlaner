@@ -20,7 +20,7 @@ import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.MyPlan.Presenter.MyPlanPresenter;
 import com.example.foodplaner.MyPlan.Presenter.MyPlanPresenterInterface;
 import com.example.foodplaner.Network.MealClient;
-import com.example.foodplaner.Network.Repository;
+import com.example.foodplaner.rebo.Repository;
 import com.example.foodplaner.R;
 
 import org.reactivestreams.Subscription;
