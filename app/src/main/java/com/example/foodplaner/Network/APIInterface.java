@@ -16,6 +16,9 @@ public interface APIInterface {
 
     @GET("search.php?s")
     public Single<Meals> getMeals();
+    @GET("search.php")
+    public Single<Meals> getMeals(@Query("f") String letter);
+
 
     @GET("random.php")
     Observable<Meals> getRandomMeal();

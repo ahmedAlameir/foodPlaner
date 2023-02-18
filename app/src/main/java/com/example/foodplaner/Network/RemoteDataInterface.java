@@ -11,6 +11,7 @@ public interface RemoteDataInterface {
     public void getRandomMeal(RandomMealCallBack randomMealCallBack);
 
     public  void  getCategories(CategoriesCallBack callBack);
+    void getData(NetworkDelegate networkDelegate, String l);
 
     void getCategoriesList(ChipListCallback callback);
 

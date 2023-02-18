@@ -1,15 +1,23 @@
 package com.example.foodplaner.MyPlan.View;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
+import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.R;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,11 +25,20 @@ public class MyPlanAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> day;
     private HashMap<String,List<String>> dayItem;
+    OnDeleteClickListener onDeleteClickListener;
+    List<PlanMeal> planMeals;
 
-    public MyPlanAdapter(Context context, List<String> day, HashMap<String, List<String>> dayItem) {
+
+    public MyPlanAdapter(Context context, List<String> day, HashMap<String, List<String>> dayItem,OnDeleteClickListener listener,List<PlanMeal> planMeals) {
         this.context = context;
         this.day = day;
         this.dayItem = dayItem;
+        onDeleteClickListener=listener;
+        this.planMeals=planMeals;
+    }
+    public void setMeals(List<String> day,HashMap<String,List<String>> dayItem){
+        this.day=day;
+        this.dayItem=dayItem;
     }
 
     @Override
@@ -83,6 +100,14 @@ public class MyPlanAdapter extends BaseExpandableListAdapter {
         }
         TextView dayitemtv=view.findViewById(R.id.dayitemtv);
         dayitemtv.setText(dayItemTitle);
+        ImageView remove=view.findViewById(R.id.plantrash);
+        ConstraintLayout dayItemLayout=view.findViewById(R.id.day_item_layout);
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onDeleteClickListener.onDelete(dayItemTitle);
+            }
+        });
 
         return view;
     }

@@ -19,6 +19,7 @@
             android:exported="false"
             android:label="@string/title_activity_launch2"
             android:theme="@style/Theme.FoodPlaner.NoActionBar" />
+
         <activity
             android:name=".MealMainScreen.MealMainScreenActivity"
             android:exported="false" />

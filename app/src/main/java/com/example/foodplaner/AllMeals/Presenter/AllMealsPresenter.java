@@ -2,10 +2,13 @@ package com.example.foodplaner.AllMeals.Presenter;
 
 import com.example.foodplaner.AllMeals.View.AllMealViewInterface;
 import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.Network.NetworkDelegate;
 import com.example.foodplaner.rebo.RepositoryInterface;
 
 import java.util.ArrayList;
+
+import io.reactivex.rxjava3.core.Completable;
 
 public class AllMealsPresenter implements AllMealPresenterInterface, NetworkDelegate {
     private AllMealViewInterface _view;
@@ -17,8 +20,8 @@ public class AllMealsPresenter implements AllMealPresenterInterface, NetworkDele
     }
 
     @Override
-    public void getMeals() {
-        _repo.getAllMeals(this);
+    public void getMeals(String l) {
+        _repo.getAllMeals(this,l);
 
 
     }
@@ -29,9 +32,11 @@ public class AllMealsPresenter implements AllMealPresenterInterface, NetworkDele
     }
 
     @Override
-    public void addToPlan(Meal meal) {
+    public Completable addToPlan(PlanMeal meal) {
+        return _repo.insertMeal(meal);
 
     }
+
 
     @Override
     public void getData(ArrayList<Meal> meals) {

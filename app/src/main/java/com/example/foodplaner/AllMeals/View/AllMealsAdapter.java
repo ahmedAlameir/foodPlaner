@@ -9,26 +9,36 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyViewHolder>{
     Context context;
-    ArrayList<Meal> meals;
+    List<Meal> meals;
     OnPlanClickListener onPlanClickListener;
     OnFavouriteClickListener onFavouriteClickListener;
-    public  AllMealsAdapter(OnFavouriteClickListener onFavouriteClickListener,OnPlanClickListener onPlanClickListener){
+    OnMealClickListener onMealClickListener;
+    PlanMeal planMeal;
+    public  AllMealsAdapter(OnFavouriteClickListener onFavouriteClickListener,OnPlanClickListener onPlanClickListener,OnMealClickListener onMealClickListener){
         this.onFavouriteClickListener=onFavouriteClickListener;
         this.onPlanClickListener=onPlanClickListener;
+        this.onMealClickListener=onMealClickListener;
         meals=new ArrayList<>();
     }
-    public void setMeals(ArrayList<Meal> meals) {
+    public void setMeals(List<Meal> meals) {
         this.meals = meals;
+    }
+    public void setPlanMeal(PlanMeal planMeal){
+        this.planMeal=planMeal;
+
     }
     @NonNull
     @Override
@@ -49,6 +59,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
         Glide.with(context).load(current.getStrMealThumb()).into(holder.getThumbnail());
         holder.getAddfav().setOnClickListener((view)->{onFavouriteClickListener.onAddFav(current);});
         holder.getAddplan().setOnClickListener(view -> {onPlanClickListener.onAddPlan(current);});
+        holder.getLayout().setOnClickListener(view -> {onMealClickListener.OnOpenMeal(current);});
 
 
     }
@@ -64,6 +75,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
         ImageView thumbnail;
         ImageView addfav;
         ImageView addplan;
+        ConstraintLayout layout;
 
 
         public TextView getMealname() {
@@ -85,6 +97,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
         public ImageView getAddplan() {
             return addplan;
         }
+        public ConstraintLayout getLayout(){return layout;}
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +106,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
             thumbnail=itemView.findViewById(R.id.mealview);
             addfav=itemView.findViewById(R.id.addfav);
             addplan=itemView.findViewById(R.id.addplan);
+            layout=itemView.findViewById(R.id.meal_item_id);
 
 
 

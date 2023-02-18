@@ -1,12 +1,11 @@
 package com.example.foodplaner.Model;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+
 
 import java.io.Serializable;
 
 public class Meal implements Serializable {
-    @PrimaryKey
+
     public String idMeal;
     public String strMeal;
     public String strDrinkAlternate;
@@ -61,6 +60,9 @@ public class Meal implements Serializable {
     public String strImageSource;
     public String strCreativeCommonsConfirmed;
     public String dateModified;
+
+
+
 
     public Meal(String strMeal, String strArea){
         this.strArea=strArea;
