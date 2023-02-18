@@ -48,10 +48,7 @@ public class MealClient implements RemoteDataInterface{
 
     }
 
-    @Override
-    public void getData(NetworkDelegate networkDelegate) {
 
-        Single<Meals> observable = apiInterface.getMeals()
 
     public void getData(NetworkDelegate networkDelegate,String l) {
         letter="a";

@@ -84,6 +84,7 @@ dependencies {
     //facebook
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
     //video
+
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 
 

@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
         presenter.fetchCategory();
         presenter.setOnSelectionClickListener(meal -> {
             Intent i = new Intent(getContext(), MealMainScreenActivity.class);
-            i.putExtra("meal",meal);
+            i.putExtra("MEAL",meal);
             startActivity(i);
         });
         return binding.getRoot();

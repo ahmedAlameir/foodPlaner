@@ -56,9 +56,7 @@ public class Repository implements RepositoryInterface{
     }
 
 
-    public void getAllMeals(NetworkDelegate networkDelegate) {
-            remote.getData(networkDelegate);
-    }
+
 
     public void getRandomMeal(RandomMealCallBack callBack){
         remote.getRandomMeal(callBack);

@@ -48,7 +48,7 @@ public class ListFragment extends Fragment implements ListInterface{
         binding.catList.setAdapter(adapter);
         presenter.setOnListClickListener(meal -> {
             Intent i = new Intent(getContext(), MealMainScreenActivity.class);
-            i.putExtra("meal",meal);
+            i.putExtra("MEAL",meal);
             startActivity(i);
         });
 
