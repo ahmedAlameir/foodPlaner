@@ -13,11 +13,13 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.FoodPlaner.NoActionBa" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+
+    <style name="Theme.FoodPlaner.NoActionBa" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
 
     <style name="Theme.NavDrawerTest.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.NavDrawerTest.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="life_is_inf">
 
         <item name="android:textSize">
@@ -29,5 +31,18 @@
         </item>
 
     </style>
+
+    <style name="CustomChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/background_color_chip_state_list</item>
+    </style>
+
+    <style name="Theme.FoodPlaner.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FoodPlaner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FoodPlaner.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

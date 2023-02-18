@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Network.CallBack.CategoriesCallBack;
+import com.example.foodplaner.Network.CallBack.ChipListCallback;
+import com.example.foodplaner.Network.CallBack.FilteredCallBack;
 import com.example.foodplaner.Network.CallBack.RandomMealCallBack;
 import com.example.foodplaner.Network.NetworkDelegate;
 import com.example.foodplaner.Network.RemoteDataInterface;
@@ -56,5 +58,34 @@ public class Repository implements RepositoryInterface{
     @Override
     public LiveData<List<Meal>> getStoredMeals() {
         return null;
+    }
+
+    public void getCategoryList(ChipListCallback callback) {
+        remote.getCategoriesList(callback);
+    }
+
+    public void getAreaList(ChipListCallback callback) {
+        remote.getAreaList(callback);
+    }
+
+    public void getIngredientList(ChipListCallback callback) {
+        remote.getIngredientList(callback);
+
+    }
+
+    public void getCategoryFiltered(String s, FilteredCallBack callBack) {
+        remote.getCategoryFiltered( s, callBack);
+    }
+
+    public void getAreaFiltered(String s, FilteredCallBack callBack) {
+        remote.getAreaFiltered( s,  callBack);
+    }
+
+    public void getIngredientFiltered(String s, FilteredCallBack callBack) {
+        remote.getIngredientFiltered( s,  callBack);
+    }
+
+    public void getGetMeal(String idMeal,FilteredCallBack callBack) {
+        remote.getGetMeal(idMeal,callBack);
     }
 }

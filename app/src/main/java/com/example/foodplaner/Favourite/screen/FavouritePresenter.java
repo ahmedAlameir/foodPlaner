@@ -8,6 +8,9 @@ public class FavouritePresenter {
 
     private FavouriteClickListener listener;
 
+    public FavouritePresenter(FavouriteInterface favouriteInterface){
+
+    }
     public void setOnCategoryClickListener(FavouriteClickListener listener) {
         this.listener = listener;
     }

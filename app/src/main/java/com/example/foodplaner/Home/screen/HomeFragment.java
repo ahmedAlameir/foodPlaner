@@ -1,5 +1,6 @@
 package com.example.foodplaner.Home.screen;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.foodplaner.Home.adaptor.home_category.HomeCategoryAdapter;
 import com.example.foodplaner.Home.adaptor.home_selection.HomeSelectionAdapter;
 import com.example.foodplaner.MainActivity;
+import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
 import com.example.foodplaner.Model.Categories;
 import com.example.foodplaner.Model.Category;
 import com.example.foodplaner.Model.Meal;
@@ -51,8 +53,15 @@ public class HomeFragment extends Fragment implements HomeInterface {
         binding.homeSelectionList.setAdapter(selectionAdapter);
         presenter.fetchMeals();
         presenter.fetchCategory();
+        presenter.setOnSelectionClickListener(meal -> {
+            Intent i = new Intent(getContext(), MealMainScreenActivity.class);
+            i.putExtra("meal",meal);
+            startActivity(i);
+        });
         return binding.getRoot();
     }
+
+
 
     @Override
     public void setDataInSelectionList(List<Meal> meals) {
