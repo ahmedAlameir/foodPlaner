@@ -11,4 +11,6 @@ public interface HomeInterface {
     public void setDataInSelectionList(List<Meal> meals);
 
     void setCategoriesInSelectionList(List<Category> categories);
+
+    void goToMeal(Meal meal);
 }

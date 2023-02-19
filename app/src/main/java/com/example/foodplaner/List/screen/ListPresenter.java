@@ -5,6 +5,7 @@ import android.widget.Switch;
 
 import com.example.foodplaner.List.adapter.ListClickListener;
 import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.Model.User;
 import com.example.foodplaner.database.MealLocalSource;
 import com.example.foodplaner.rebo.Repository;
@@ -12,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Completable;
 
 public class ListPresenter {
     
@@ -104,6 +107,14 @@ public class ListPresenter {
             localSource.insertMeal(new User(FirebaseAuth.getInstance().getUid(), meals.getMeals().get(0)));
 
         });
+    }
+
+    public Completable addToPlan(PlanMeal meal) {
+        return repo.insertMeal(meal);
+    }
+
+    public void onClickedPlan(Meal meal) {
+        listInterface.onAddPlan(meal);
     }
 }
 enum ChosenFilter{

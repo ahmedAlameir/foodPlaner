@@ -63,4 +63,10 @@ public class HomePresenter {
             home.setCategoriesInSelectionList(categories.getCategories());
         });
     }
+
+    public void sendMealOfTheDay() {
+        repo.getGetMeal("52867",meals -> {
+            home.goToMeal(meals.getMeals().get(0));
+        });
+    }
 }

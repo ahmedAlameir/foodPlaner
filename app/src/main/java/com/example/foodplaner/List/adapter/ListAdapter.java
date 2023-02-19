@@ -81,7 +81,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                 presenter.saveData(item);
             });
             binding.addplan.setOnClickListener(v -> {
-
+                presenter.onClickedPlan(item);
             });
             binding.getRoot().setOnClickListener(v -> presenter.onListClick(item));
         }
