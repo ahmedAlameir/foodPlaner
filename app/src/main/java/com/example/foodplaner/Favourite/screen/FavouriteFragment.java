@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.foodplaner.Favourite.adaptor.FavouriteAdapter;
-import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
+import com.example.foodplaner.MealMainScreen.View.MealMainScreenActivity;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Model.User;
 import com.example.foodplaner.R;
