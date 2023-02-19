@@ -3,6 +3,8 @@ package com.example.foodplaner.rebo;
 import android.content.Context;
 
 
+import com.example.foodplaner.Model.User;
+
 import com.example.foodplaner.Network.CallBack.CategoriesCallBack;
 import com.example.foodplaner.Network.CallBack.ChipListCallback;
 import com.example.foodplaner.Network.CallBack.FilteredCallBack;
@@ -12,6 +14,7 @@ import com.example.foodplaner.Network.NetworkDelegate;
 import com.example.foodplaner.Network.RemoteDataInterface;
 import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.PlanDB.PlanConcreteLocalSource;
+import com.example.foodplaner.database.MealLocalSource;
 
 import java.util.List;
 
@@ -22,12 +25,14 @@ public class Repository implements RepositoryInterface{
     Context context;
     RemoteDataInterface remote;
     PlanConcreteLocalSource planConcreteLocalSource;
+    MealLocalSource mealLocalSource;
     private static Repository repo=null;
 
     public Repository(RemoteDataInterface remotesource, Context context) {
         remote=remotesource;
         this.context=context;
         planConcreteLocalSource=PlanConcreteLocalSource.getInstance(context);
+        mealLocalSource=MealLocalSource.getInstance(context);
     }
 
     public static Repository getInstance(RemoteDataInterface remotesource,Context context){
@@ -37,6 +42,7 @@ public class Repository implements RepositoryInterface{
         return repo;
 
     }
+
 
     @Override
     public Completable insertMeal(PlanMeal meal) {
@@ -54,7 +60,9 @@ public class Repository implements RepositoryInterface{
             remote.getData(networkDelegate,l);
     }
 
-
+    public void addMealToFav(User user){
+        mealLocalSource.insertMeal(user);
+    }
 
 
     public void getRandomMeal(RandomMealCallBack callBack){

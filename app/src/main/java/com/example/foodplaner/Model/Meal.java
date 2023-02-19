@@ -61,7 +61,9 @@ public class Meal implements Serializable {
     public String strCreativeCommonsConfirmed;
     public String dateModified;
 
+    public Meal(){
 
+    }
 
 
     public Meal(String strMeal, String strArea){

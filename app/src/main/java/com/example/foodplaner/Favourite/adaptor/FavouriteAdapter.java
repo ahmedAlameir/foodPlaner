@@ -1,6 +1,7 @@
 package com.example.foodplaner.Favourite.adaptor;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -68,12 +69,18 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         public void bind(Meal item) {
             binding.mealarea.setText(item.strArea);
             binding.mealname.setText(item.strMeal);
-//            Glide.with(presenter.getContext())
-//                    .load(item.strMealThumb)
-//                    .error(R.drawable.wqurxy1511453156)
-//                    .into(binding.mealview);
-//
-            //binding.getRoot().setOnClickListener(v -> presenter.onListClick(item));
+            binding.addfav.setImageResource(R.drawable.trash);
+            binding.addfav.setOnClickListener(v -> {
+                presenter.deleteItem(item);
+            });
+            binding.addplan.setVisibility(View.GONE);
+            binding.textView5.setVisibility(View.GONE);
+            Glide.with(presenter.getContext())
+                    .load(item.strMealThumb)
+                    .error(R.drawable.wqurxy1511453156)
+                    .into(binding.mealview);
+
+            binding.getRoot().setOnClickListener(v -> presenter.onMealClick(item));
         }
     }
 }

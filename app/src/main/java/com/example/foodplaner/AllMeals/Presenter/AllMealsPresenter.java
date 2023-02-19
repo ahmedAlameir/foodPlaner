@@ -3,8 +3,10 @@ package com.example.foodplaner.AllMeals.Presenter;
 import com.example.foodplaner.AllMeals.View.AllMealViewInterface;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Model.PlanMeal;
+import com.example.foodplaner.Model.User;
 import com.example.foodplaner.Network.NetworkDelegate;
 import com.example.foodplaner.rebo.RepositoryInterface;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ public class AllMealsPresenter implements AllMealPresenterInterface, NetworkDele
 
     @Override
     public void addToFav(Meal meal) {
+        _repo.addMealToFav(new User(FirebaseAuth.getInstance().getUid(),meal));
 
     }
 

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.util.Patterns;
@@ -69,7 +71,8 @@ public class LogInFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-
+                NavDirections action = LogInFragmentDirections.actionLogInFragmentToRegisterFragment();
+                Navigation.findNavController(view).navigate(action);
             }
         });
         progressDialog=new ProgressDialog(getActivity());
@@ -80,9 +83,13 @@ public class LogInFragment extends Fragment {
             public void onClick(View view) {
                 String emailAddress= email.getText().toString();
                 String pass=password.getText().toString().trim();
+                Log.i("TAG", "onClick: "+pass);
                 if(!Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()){
                     email.setError("invalid email");
                     email.setFocusable(true);
+                }else if(pass==null){
+                    Toast.makeText(getActivity(), "pass is empty", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
                     login(emailAddress,pass);
@@ -95,11 +102,12 @@ public class LogInFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
             }
         });
     }
 
-    private void login(String emailAddress, String pass) {
+    private void login(  String emailAddress, String pass) {
         progressDialog.show();
         auth.signInWithEmailAndPassword(emailAddress,pass)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -109,11 +117,12 @@ public class LogInFragment extends Fragment {
                             progressDialog.dismiss();
                             FirebaseUser user=auth.getCurrentUser();
                             startActivity(new Intent(getActivity(), MainActivity.class));
+                            getActivity().finish();
 
                         }
                         else {
                             progressDialog.dismiss();
-                            Toast.makeText(getActivity(), "login failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "login failed", Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -121,7 +130,8 @@ public class LogInFragment extends Fragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.i("TAG", "onFailure: "+e.getMessage());
+                        Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
