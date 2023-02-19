@@ -5,7 +5,10 @@ import android.widget.Switch;
 
 import com.example.foodplaner.List.adapter.ListClickListener;
 import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.Model.User;
+import com.example.foodplaner.database.MealLocalSource;
 import com.example.foodplaner.rebo.Repository;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +18,13 @@ public class ListPresenter {
     private ListInterface listInterface;
     private Repository repo;
     private ChosenFilter chosenFilter;
-
+    MealLocalSource localSource;
     private Context context;
     private ListClickListener listener;
     private ArrayList<String> chipName;
     public ListPresenter(ListInterface listInterface, Repository repository, Context context){
         this.listInterface=listInterface;
+        localSource = MealLocalSource.getInstance(context);
         repo = repository;
         this.context = context;
     }
@@ -93,6 +97,13 @@ public class ListPresenter {
                     listInterface.setMealData(meals.getMeals());
                 });                break;
         }
+    }
+
+    public void saveData(Meal item) {
+        repo.getGetMeal(item.idMeal,meals -> {
+            localSource.insertMeal(new User(FirebaseAuth.getInstance().getUid(), meals.getMeals().get(0)));
+
+        });
     }
 }
 enum ChosenFilter{

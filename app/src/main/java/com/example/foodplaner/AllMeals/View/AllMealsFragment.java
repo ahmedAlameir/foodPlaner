@@ -135,7 +135,7 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
 
     @Override
     public void addToFav(Meal meal) {
-
+        allMealPresenterInterface.addToFav(meal);
     }
 
     @Override

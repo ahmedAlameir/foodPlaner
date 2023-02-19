@@ -1,5 +1,7 @@
 package com.example.foodplaner.Favourite.adaptor;
 
+import com.example.foodplaner.Model.Meal;
+
 public interface FavouriteClickListener {
-    void onItemClick(String meal);
+    void onItemClick(Meal meal);
 }

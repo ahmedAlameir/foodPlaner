@@ -1,6 +1,7 @@
 package com.example.foodplaner.rebo;
 
 
+import com.example.foodplaner.Model.User;
 import com.example.foodplaner.Network.NetworkDelegate;
 import com.example.foodplaner.Model.PlanMeal;
 
@@ -14,5 +15,6 @@ public interface RepositoryInterface {
     public void deleteMeal(PlanMeal meal);
     public void getAllMeals(NetworkDelegate networkDelegate, String l);
     public Single<List<PlanMeal>> getStoredMeals();
+    public void addMealToFav(User user);
 
 }

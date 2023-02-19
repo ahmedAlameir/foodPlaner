@@ -16,6 +16,7 @@ import com.example.foodplaner.database.MealLocalSource;
 import com.example.foodplaner.databinding.AllmealsItemBinding;
 import com.example.foodplaner.databinding.HomeCatagoryItemBinding;
 import com.example.foodplaner.databinding.SearshCatagoryItemBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                     .error(R.drawable.wqurxy1511453156)
                     .into(binding.mealview);
             binding.addfav.setOnClickListener(v -> {
-                MealLocalSource.getInstance(presenter.getContext()).insertMeal(new User("2",item));
+                presenter.saveData(item);
+            });
+            binding.addplan.setOnClickListener(v -> {
+
             });
             binding.getRoot().setOnClickListener(v -> presenter.onListClick(item));
         }
