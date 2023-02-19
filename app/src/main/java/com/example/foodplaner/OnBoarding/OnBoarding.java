@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.foodplaner.LaunchActivity2;
 import com.example.foodplaner.MainActivity;
 import com.example.foodplaner.R;
 
@@ -31,7 +32,8 @@ public class OnBoarding extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(OnBoarding.this, MainActivity.class));
+               startActivity(new Intent(OnBoarding.this, LaunchActivity2.class));
+               finish();
             }
         });
 
