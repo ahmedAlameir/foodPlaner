@@ -1,6 +1,7 @@
-package com.example.foodplaner.AllMeals.View;
+package com.example.foodplaner.MealMainScreen.View;
 
 import android.app.Dialog;
+import androidx.fragment.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -8,24 +9,25 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 
 import com.example.foodplaner.R;
 
-public class DayChoiceDialog extends DialogFragment {
+public class DayChoiceDialogActivity extends DialogFragment {
     int position =0;
-    public interface DayChoiceListener{
+
+    public interface DayChoiceListenerActivity{
         void onPositiveButtonClicked(String [] list, int position);
         void onNegativeButtonClicked();
     }
-    DayChoiceListener listener;
+    DayChoiceDialogActivity.DayChoiceListenerActivity listenerActivity;
 
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         try {
-           listener = (DayChoiceListener) getTargetFragment();
+
+            listenerActivity= (DayChoiceDialogActivity.DayChoiceListenerActivity) context;
         } catch (Exception e) {
             throw new ClassCastException(getActivity().toString()+"DayChoiceListener must be implemented");
         }
@@ -47,7 +49,7 @@ public class DayChoiceDialog extends DialogFragment {
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        listener.onPositiveButtonClicked(list,position);
+                        listenerActivity.onPositiveButtonClicked(list,position);
 
 
                     }
@@ -55,7 +57,7 @@ public class DayChoiceDialog extends DialogFragment {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        listener.onNegativeButtonClicked();
+                        listenerActivity.onNegativeButtonClicked();
 
                     }
                 });
@@ -63,3 +65,4 @@ public class DayChoiceDialog extends DialogFragment {
 
     }
 }
+

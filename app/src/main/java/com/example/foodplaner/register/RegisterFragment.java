@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.foodplaner.LogIn.LogInFragmentDirections;
 import com.example.foodplaner.MainActivity;
-import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
 import com.example.foodplaner.R;
 import com.example.foodplaner.databinding.FragmentRegisterBinding;
 import com.google.firebase.auth.FirebaseAuth;

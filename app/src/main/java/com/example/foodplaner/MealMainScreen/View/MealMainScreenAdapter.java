@@ -1,4 +1,4 @@
-package com.example.foodplaner.MealMainScreen;
+package com.example.foodplaner.MealMainScreen.View;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,11 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodplaner.AllMeals.View.AllMealsAdapter;
-import com.example.foodplaner.AllMeals.View.OnFavouriteClickListener;
-import com.example.foodplaner.AllMeals.View.OnPlanClickListener;
 import com.example.foodplaner.Model.Ingredient;
-import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.R;
 
 import java.util.ArrayList;

@@ -19,26 +19,38 @@
             android:exported="true"
             android:label="@string/title_activity_launch2"
             android:theme="@style/Theme.FoodPlaner.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
-        <activity
-            android:name=".MealMainScreen.MealMainScreenActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="false"/>
+        <activity
+
+            android:name=".OnBoarding.OnBoarding"
+            android:exported="false" />
+        <activity
+            android:name=".Splash1"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        <activity
+            android:name=".MealMainScreen.View.MealMainScreenActivity"
+            android:exported="false" />
 
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

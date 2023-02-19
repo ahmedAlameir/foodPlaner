@@ -5,17 +5,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
-import com.example.foodplaner.AllMeals.View.OnMealClickListener;
-import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
+import com.example.foodplaner.MealMainScreen.View.MealMainScreenActivity;
 import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.MyPlan.Presenter.MyPlanPresenter;
 import com.example.foodplaner.MyPlan.Presenter.MyPlanPresenterInterface;
@@ -23,16 +20,12 @@ import com.example.foodplaner.Network.MealClient;
 import com.example.foodplaner.rebo.Repository;
 import com.example.foodplaner.R;
 
-import org.reactivestreams.Subscription;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.FlowableSubscriber;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -105,6 +98,17 @@ public class MyPlanFragment extends Fragment implements OnDeleteClickListener, M
         planAdapter=new MyPlanAdapter(getActivity(),day,dayItem,this,allMeals);
         planAdapter.notifyDataSetChanged();
         expandableListView.setAdapter(planAdapter);
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int lastPosition=-1;
+            @Override
+            public void onGroupExpand(int i) {
+                if(lastPosition!=-1&& i !=lastPosition){
+                    expandableListView.collapseGroup(lastPosition);
+                }
+                lastPosition=i;
+
+            }
+        });
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
@@ -128,11 +132,11 @@ public class MyPlanFragment extends Fragment implements OnDeleteClickListener, M
 
 
     private void fillList(List<PlanMeal> item) {
+
         for(int i=0;i< item.size();i++){
 
             if (item.get(i).getDay().equals("Saturday")){
                 topic1.add(item.get(i).getMeal().getStrMeal());
-
             }
             else if (item.get(i).getDay().equals("Sunday")){
                 topic2.add(item.get(i).getMeal().getStrMeal());
@@ -168,6 +172,10 @@ public class MyPlanFragment extends Fragment implements OnDeleteClickListener, M
         dayItem.put(day.get(4),topic5);
         dayItem.put(day.get(5),topic6);
         dayItem.put(day.get(6),topic7);
+        planAdapter.setMeals(day,dayItem,allMeals);
+        planAdapter.notifyDataSetChanged();
+
+
 
     }
 
@@ -186,10 +194,7 @@ public class MyPlanFragment extends Fragment implements OnDeleteClickListener, M
 
     @Override
     public void deleteFromPlan(PlanMeal meal) {
-        myPlanPresenterInterface.deleteFromPlan(meal);
-
-
-
+         myPlanPresenterInterface.deleteFromPlan(meal);
 
     }
 

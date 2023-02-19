@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +11,10 @@ import android.view.ViewGroup;
 
 import com.example.foodplaner.Home.adaptor.home_category.HomeCategoryAdapter;
 import com.example.foodplaner.Home.adaptor.home_selection.HomeSelectionAdapter;
-import com.example.foodplaner.MainActivity;
-import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
-import com.example.foodplaner.Model.Categories;
+import com.example.foodplaner.MealMainScreen.View.MealMainScreenActivity;
 import com.example.foodplaner.Model.Category;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Network.MealClient;
-import com.example.foodplaner.R;
 import com.example.foodplaner.databinding.FragmentHomeBinding;
 import com.example.foodplaner.rebo.Repository;
 

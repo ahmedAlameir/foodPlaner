@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.foodplaner.List.adapter.ListAdapter;
-import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
+import com.example.foodplaner.MealMainScreen.View.MealMainScreenActivity;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Network.MealClient;
 import com.example.foodplaner.R;

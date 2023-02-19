@@ -1,23 +1,18 @@
 package com.example.foodplaner.MyPlan.View;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
 import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.R;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,9 +31,10 @@ public class MyPlanAdapter extends BaseExpandableListAdapter {
         onDeleteClickListener=listener;
         this.planMeals=planMeals;
     }
-    public void setMeals(List<String> day,HashMap<String,List<String>> dayItem){
+    public void setMeals(List<String> day,HashMap<String,List<String>> dayItem,List<PlanMeal> planMeals){
         this.day=day;
         this.dayItem=dayItem;
+        this.planMeals=planMeals;
     }
 
     @Override
@@ -106,6 +102,9 @@ public class MyPlanAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View view) {
                 onDeleteClickListener.onDelete(dayItemTitle);
+                List<String> child=dayItem.get(day.get(i));
+                child.remove(i1);
+                notifyDataSetChanged();
             }
         });
 

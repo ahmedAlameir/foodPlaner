@@ -32,6 +32,7 @@ public class PlanConcreteLocalSource {
         return dao.insertMeal(meal);
     }
 
+
     public void delete(PlanMeal meal) {
         new Thread(new Runnable() {
             @Override

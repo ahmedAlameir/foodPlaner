@@ -35,4 +35,5 @@
         android:name="com.example.foodplaner.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
 </navigation>

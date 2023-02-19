@@ -50,14 +50,15 @@
 
         <TextView
             android:id="@+id/mealname"
-            android:layout_width="146dp"
-            android:layout_height="73dp"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
             android:layout_marginStart="12dp"
+            android:fontFamily="@font/inknut_antiqua_light"
             android:text="Poutine"
             android:textColor="#DB9C72"
             android:textColorHint="#DB9C72"
-            android:textSize="30dp"
 
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/addplan"
             app:layout_constraintEnd_toStartOf="@+id/addfav"
             app:layout_constraintStart_toEndOf="@+id/cardView2"
@@ -69,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="28dp"
+            android:fontFamily="@font/inria_serif"
             android:text="Add to plan"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
