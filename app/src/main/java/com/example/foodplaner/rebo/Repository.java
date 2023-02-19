@@ -3,7 +3,6 @@ package com.example.foodplaner.rebo;
 import android.content.Context;
 
 
-import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Network.CallBack.CategoriesCallBack;
 import com.example.foodplaner.Network.CallBack.ChipListCallback;
 import com.example.foodplaner.Network.CallBack.FilteredCallBack;
@@ -46,7 +45,7 @@ public class Repository implements RepositoryInterface{
 
     @Override
     public void deleteMeal(PlanMeal meal) {
-        planConcreteLocalSource.delete(meal);
+         planConcreteLocalSource.delete(meal);
 
     }
 

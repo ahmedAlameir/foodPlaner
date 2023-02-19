@@ -1,6 +1,7 @@
 package com.example.foodplaner.AllMeals.View;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
         Glide.with(context).load(current.getStrMealThumb()).into(holder.getThumbnail());
         holder.getAddfav().setOnClickListener((view)->{onFavouriteClickListener.onAddFav(current);});
         holder.getAddplan().setOnClickListener(view -> {onPlanClickListener.onAddPlan(current);});
+
         holder.getLayout().setOnClickListener(view -> {onMealClickListener.OnOpenMeal(current);});
 
 

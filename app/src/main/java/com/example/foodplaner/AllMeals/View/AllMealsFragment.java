@@ -21,7 +21,7 @@ import android.widget.EditText;
 
 import com.example.foodplaner.AllMeals.Presenter.AllMealPresenterInterface;
 import com.example.foodplaner.AllMeals.Presenter.AllMealsPresenter;
-import com.example.foodplaner.MealMainScreen.MealMainScreenActivity;
+import com.example.foodplaner.MealMainScreen.View.MealMainScreenActivity;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.Network.MealClient;
@@ -148,6 +148,7 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
     }
     @Override
     public void onAddPlan(Meal meal) {
+
         DialogFragment dayChoice=new DayChoiceDialog();
         dayChoice.setCancelable(false);
         dayChoice.show(getParentFragmentManager(),"Day Choice");

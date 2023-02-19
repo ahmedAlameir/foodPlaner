@@ -1,7 +1,5 @@
 package com.example.foodplaner.MyPlan.Presenter;
 
-import android.util.Log;
-
 import com.example.foodplaner.Model.PlanMeal;
 import com.example.foodplaner.MyPlan.View.MyPlanViewInterface;
 import com.example.foodplaner.rebo.RepositoryInterface;
@@ -23,7 +21,7 @@ public class MyPlanPresenter implements MyPlanPresenterInterface{
 
     @Override
     public void deleteFromPlan(PlanMeal meal) {
-        _repo.deleteMeal(meal);
+         _repo.deleteMeal(meal);
 
     }
 

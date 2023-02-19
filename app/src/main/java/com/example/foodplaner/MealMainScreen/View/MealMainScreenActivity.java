@@ -1,25 +1,28 @@
-package com.example.foodplaner.MealMainScreen;
+package com.example.foodplaner.MealMainScreen.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleObserver;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodplaner.AllMeals.View.AllMealsAdapter;
-import com.example.foodplaner.AllMeals.View.AllMealsFragment;
+import com.example.foodplaner.MealMainScreen.View.DayChoiceDialogActivity;
+import com.example.foodplaner.MealMainScreen.Presenter.MealMainScreenPresenter;
+import com.example.foodplaner.MealMainScreen.Presenter.MealMainScreenPresenterInterface;
 import com.example.foodplaner.Model.Ingredient;
 import com.example.foodplaner.Model.Meal;
+import com.example.foodplaner.Model.PlanMeal;
+import com.example.foodplaner.Network.MealClient;
 import com.example.foodplaner.R;
 import com.example.foodplaner.databinding.ActivityMealMainScreenBinding;
-import com.google.android.youtube.player.YouTubeApiServiceUtil;
+import com.example.foodplaner.rebo.Repository;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -28,7 +31,13 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class MealMainScreenActivity extends AppCompatActivity {
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class MealMainScreenActivity extends AppCompatActivity implements MealMainScreenViewInterface,DayChoiceDialogActivity.DayChoiceListenerActivity{
     private ActivityMealMainScreenBinding binding;
     MealMainScreenAdapter adapter;
     ArrayList<Ingredient> ingredients = new ArrayList<>();
@@ -38,9 +47,14 @@ public class MealMainScreenActivity extends AppCompatActivity {
     TextView mealArea;
     TextView Instructions;
     YouTubePlayerView mealVideo;
+    String day;
 
     Ingredient ingredient;
     String ingrdient_img;
+    ImageView plan;
+    ImageView fav;
+    PlanMeal planMeal=new PlanMeal();
+    MealMainScreenPresenterInterface mealMainScreenPresenterInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +68,10 @@ public class MealMainScreenActivity extends AppCompatActivity {
         mealArea = findViewById(R.id.meal_area);
         mealVideo=findViewById(R.id.meal_video);
         Instructions = findViewById(R.id.instructionbody);
+        plan=findViewById(R.id.mealscreenplan);
+        fav=findViewById(R.id.mealscreenfav);
+        mealMainScreenPresenterInterface=new MealMainScreenPresenter(this, Repository.getInstance(MealClient.getINSTANCE(),this));
+
 
 
         Bundle extras = getIntent().getExtras();
@@ -91,6 +109,17 @@ public class MealMainScreenActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.setMeals(ingredients);
         adapter.notifyDataSetChanged();
+        plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment dayChoice= new DayChoiceDialogActivity();
+                dayChoice.setCancelable(false);
+                dayChoice.show(getSupportFragmentManager(),"Choice");
+                planMeal.setIdMeal(meal.getIdMeal());
+                planMeal.setMeal(meal);
+
+            }
+        });
 
     }
 
@@ -217,5 +246,53 @@ public class MealMainScreenActivity extends AppCompatActivity {
             ingredient = new Ingredient(meal.getStrIngredient20(), meal.getStrMeasure20(), ingrdient_img);
             ingredients.add(ingredient);
         }
+    }
+
+    @Override
+    public void onPositiveButtonClicked(String[] list, int position) {
+        Log.i("TAG",list[position]+" is selected");
+        day=list[position];
+        planMeal.setDay(day);
+        Completable comp=addToPlan(planMeal);
+
+        comp.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("TAG","added to plan");
+                        //Toast.makeText(AllMealsFragment.this,"Added To Favourite", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
+
+    }
+
+    @Override
+    public void onNegativeButtonClicked() {
+
+    }
+
+
+    @Override
+    public Completable addToPlan(PlanMeal meal) {
+        return mealMainScreenPresenterInterface.addToPlan(meal);
+
+    }
+
+    @Override
+    public void addToFav(Meal meal) {
+
     }
 }
