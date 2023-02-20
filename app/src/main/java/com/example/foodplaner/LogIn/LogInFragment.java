@@ -18,18 +18,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.foodplaner.CheckInternet;
 import com.example.foodplaner.MainActivity;
 import com.example.foodplaner.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 
 public class LogInFragment extends Fragment {
@@ -38,6 +46,10 @@ public class LogInFragment extends Fragment {
     Button login;
     Button signup;
     Button skip;
+    ImageView google;
+    GoogleSignInClient googleSignInClient;
+
+
     private FirebaseAuth auth;
     ProgressDialog progressDialog;
 
@@ -70,6 +82,13 @@ public class LogInFragment extends Fragment {
         login=view.findViewById(R.id.sign_in);
         signup=view.findViewById(R.id.sign_up);
         skip=view.findViewById(R.id.skip);
+        google = view.findViewById(R.id.google);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +121,7 @@ public class LogInFragment extends Fragment {
         });
 
 
+
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +130,14 @@ public class LogInFragment extends Fragment {
                 getActivity().finish();
             }
         });
+        google.setOnClickListener(v -> {
+
+            Intent intent = googleSignInClient.getSignInIntent();
+            // Start activity for result
+            startActivityForResult(intent, 100);
+
+        });
+
     }
 
     private void login(  String emailAddress, String pass) {
@@ -143,5 +171,47 @@ public class LogInFragment extends Fragment {
 
 
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Check condition
+        if (requestCode == 100) {
+            // When request code is equal to 100 initialize task
+            Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            // check condition
+            if (signInAccountTask.isSuccessful()) {
+                // When google sign in successful initialize string
+                String s = "Google sign in successful";
+                // Display Toast
+                // Initialize sign in account
+                try {
+                    // Initialize sign in account
+                    GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
+                    // Check condition
+                    if (googleSignInAccount != null) {
+                        // When sign in account is not equal to null initialize auth credential
+                        AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
+                        // Check credential
+                        auth.signInWithCredential(authCredential).addOnCompleteListener(getActivity(), task -> {
+                            if(task.isSuccessful()){
+
+                                startActivity(new Intent(getActivity(), MainActivity.class));
+                                getActivity().finish();
+
+                            }
+                            else {
+                                progressDialog.dismiss();
+                                Toast.makeText(getActivity(), "login failed", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                } catch (ApiException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 
 }

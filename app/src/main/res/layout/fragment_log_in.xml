@@ -51,27 +51,24 @@
         android:layout_marginTop="150dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Email"
+
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10">
 
-        <EditText
-            android:id="@+id/password_edit_txt"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:background="@drawable/rounded_edit_txt"
-            android:ems="10"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/password_edit_txt"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edit_txt"
+        android:ems="10"
+
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <TextView
         android:id="@+id/textView10"
@@ -94,7 +91,7 @@
         android:text="login"
         app:cornerRadius="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordlayout" />
+        app:layout_constraintTop_toBottomOf="@+id/password_edit_txt" />
 
     <TextView
         android:id="@+id/textView11"
