@@ -11,7 +11,7 @@
     <EditText
         android:id="@+id/email_edit_txt"
         android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_edit_txt"
@@ -67,7 +67,7 @@
         <EditText
             android:id="@+id/password_edit_txt"
             android:layout_width="300dp"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_edit_txt"
             android:ems="10"
             android:inputType="textPassword" />

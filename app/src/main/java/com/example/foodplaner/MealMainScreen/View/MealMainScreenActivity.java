@@ -7,7 +7,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,6 +34,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.StringTokenizer;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -51,6 +54,7 @@ public class MealMainScreenActivity extends AppCompatActivity implements MealMai
     TextView Instructions;
     YouTubePlayerView mealVideo;
     String day;
+    ImageView calender;
 
     Ingredient ingredient;
     String ingrdient_img;
@@ -72,6 +76,7 @@ public class MealMainScreenActivity extends AppCompatActivity implements MealMai
         mealArea = findViewById(R.id.meal_area);
         mealVideo=findViewById(R.id.meal_video);
         Instructions = findViewById(R.id.instructionbody);
+        calender=findViewById(R.id.calender);
         plan=findViewById(R.id.mealscreenplan);
         fav=findViewById(R.id.mealscreenfav);
         connectionBuilder =new AlertDialog.Builder(this);
@@ -125,6 +130,21 @@ public class MealMainScreenActivity extends AppCompatActivity implements MealMai
                 dayChoice.show(getSupportFragmentManager(),"Choice");
                 planMeal.setIdMeal(meal.getIdMeal());
                 planMeal.setMeal(meal);
+
+            }
+        });
+        calender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Intent.ACTION_INSERT);
+                intent.setData(CalendarContract.Events.CONTENT_URI);
+                intent.putExtra(CalendarContract.Events.TITLE,meal.getStrMeal());
+                intent.putExtra(Intent.EXTRA_EMAIL,"hadiayzmm@gmail.com");
+                try{
+                    startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(MealMainScreenActivity.this,e.getMessage()+"there is no app support this action",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

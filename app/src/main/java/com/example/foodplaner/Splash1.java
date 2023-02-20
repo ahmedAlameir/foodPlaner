@@ -15,7 +15,7 @@ public class Splash1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_splash1);
+        setContentView(R.layout.activity_splash);
         final SharedPreferences[] onBoardingScreen = new SharedPreferences[1];
         new Handler().postDelayed(new Runnable() {
             @Override

@@ -5,7 +5,7 @@
     android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_splash1_scene"
+    app:layoutDescription="@xml/activity_splash_scene"
     tools:context=".Splash1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,34 +19,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-    android:id="@+id/coloredlogo"
-    android:adjustViewBounds="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:minHeight="400dp"
-    android:minWidth="400dp"
-    android:src="@drawable/logoc"
-    android:scaleType="fitCenter"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-    <ImageView
-        android:id="@+id/whitelogo"
-        android:adjustViewBounds="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="400dp"
-        android:minWidth="400dp"
-        android:src="@drawable/logow"
-        android:scaleType="fitCenter"
+        android:id="@+id/color"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/logoc1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
+    <ImageView
+        android:id="@+id/white"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/logow1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
