@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.example.foodplaner.databinding.ActivityMainBinding;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private MenuItem profileMenuItem;
     private AlertDialog.Builder builder;
+    private AlertDialog.Builder connectionBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         builder = new AlertDialog.Builder(this);
         builder.setMessage("please login first");
+        connectionBuilder =new AlertDialog.Builder(this);
+        connectionBuilder.setMessage("No Internet Connection");
+        isThereConnection();
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -57,10 +62,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.homeFragment:
                 // Perform your condition check here
                     navController.navigate(R.id.homeFragment);
+                    isThereConnection();
                return true;
             case R.id.listFragment:
 
                 navController.navigate(R.id.listFragment);
+                isThereConnection();
                 return true;
             case R.id.favouriteFragment:
                 if (FirebaseAuth.getInstance().getCurrentUser() == null) {
@@ -82,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 } case R.id.allMealsFragment:
 
                 navController.navigate(R.id.allMealsFragment);
+                isThereConnection();
                 return true;
             default:
                 return false;
@@ -116,6 +124,14 @@ public class MainActivity extends AppCompatActivity {
         binding.navView.setVisibility(View.VISIBLE);
         profileMenuItem.setVisible(true);
         return NavigationUI.navigateUp(navController, appBarConfiguration)|| super.onSupportNavigateUp();
+    }
+    public void isThereConnection(){
+        AlertDialog dialog;
+        if(!CheckInternet.getConnectivity(this)){
+          dialog=connectionBuilder.create();
+          dialog.show();
+           // Toast.makeText(this, "No Internet", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

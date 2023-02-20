@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,9 +19,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.foodplaner.AllMeals.Presenter.AllMealPresenterInterface;
 import com.example.foodplaner.AllMeals.Presenter.AllMealsPresenter;
+import com.example.foodplaner.CheckInternet;
 import com.example.foodplaner.MealMainScreen.View.MealMainScreenActivity;
 import com.example.foodplaner.Model.Meal;
 import com.example.foodplaner.Model.PlanMeal;
@@ -52,6 +55,7 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
     PlanMeal planMeal=new PlanMeal();
 
     AllMealPresenterInterface allMealPresenterInterface;
+    private AlertDialog.Builder connectionBuilder;
 
 
 
@@ -64,6 +68,7 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         }
 
 
@@ -80,6 +85,7 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         search=view.findViewById(R.id.allmeals_search);
+
         RecyclerView recyclerView = view.findViewById(R.id.rv_allmeals);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter=new AllMealsAdapter(AllMealsFragment.this,AllMealsFragment.this, AllMealsFragment.this);
@@ -100,6 +106,8 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                isThereConnection();
+
                 if(charSequence.length()==0)
                 {
                     adapter.setMeals(empty);
@@ -204,5 +212,13 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
         startActivity(intent);
 
 
+    }
+    public void isThereConnection(){
+        AlertDialog dialog;
+        if(!CheckInternet.getConnectivity(getActivity())){
+            dialog=connectionBuilder.create();
+            dialog.show();
+            // Toast.makeText(this, "No Internet", Toast.LENGTH_LONG).show();
+        }
     }
 }

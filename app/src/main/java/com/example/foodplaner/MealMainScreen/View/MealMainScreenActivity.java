@@ -1,6 +1,7 @@
 package com.example.foodplaner.MealMainScreen.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,8 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplaner.CheckInternet;
 import com.example.foodplaner.MealMainScreen.View.DayChoiceDialogActivity;
 import com.example.foodplaner.MealMainScreen.Presenter.MealMainScreenPresenter;
 import com.example.foodplaner.MealMainScreen.Presenter.MealMainScreenPresenterInterface;
@@ -55,6 +58,7 @@ public class MealMainScreenActivity extends AppCompatActivity implements MealMai
     ImageView fav;
     PlanMeal planMeal=new PlanMeal();
     MealMainScreenPresenterInterface mealMainScreenPresenterInterface;
+    private AlertDialog.Builder connectionBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,10 @@ public class MealMainScreenActivity extends AppCompatActivity implements MealMai
         Instructions = findViewById(R.id.instructionbody);
         plan=findViewById(R.id.mealscreenplan);
         fav=findViewById(R.id.mealscreenfav);
+        connectionBuilder =new AlertDialog.Builder(this);
+        connectionBuilder.setMessage("No Internet Connection");
+        isThereConnection();
+
         mealMainScreenPresenterInterface=new MealMainScreenPresenter(this, Repository.getInstance(MealClient.getINSTANCE(),this));
 
 
@@ -294,5 +302,13 @@ public class MealMainScreenActivity extends AppCompatActivity implements MealMai
     @Override
     public void addToFav(Meal meal) {
 
+    }
+    public void isThereConnection(){
+        AlertDialog dialog;
+        if(!CheckInternet.getConnectivity(this)){
+            dialog=connectionBuilder.create();
+            dialog.show();
+            // Toast.makeText(this, "No Internet", Toast.LENGTH_LONG).show();
+        }
     }
 }

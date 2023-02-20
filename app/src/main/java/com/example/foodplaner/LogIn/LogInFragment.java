@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.foodplaner.CheckInternet;
 import com.example.foodplaner.MainActivity;
 import com.example.foodplaner.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +40,7 @@ public class LogInFragment extends Fragment {
     Button skip;
     private FirebaseAuth auth;
     ProgressDialog progressDialog;
+
 
 
     @Override
@@ -67,6 +70,7 @@ public class LogInFragment extends Fragment {
         login=view.findViewById(R.id.sign_in);
         signup=view.findViewById(R.id.sign_up);
         skip=view.findViewById(R.id.skip);
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +106,7 @@ public class LogInFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MainActivity.class));
+
                 getActivity().finish();
             }
         });
@@ -138,4 +143,5 @@ public class LogInFragment extends Fragment {
 
 
     }
+
 }

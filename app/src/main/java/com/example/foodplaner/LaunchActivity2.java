@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -24,16 +25,19 @@ public class LaunchActivity2 extends AppCompatActivity {
     private NavController navController;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityLaunch2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
         if(FirebaseAuth.getInstance().getCurrentUser() !=null){
             startActivity(new Intent(this, MainActivity.class));
-            finish();
 
+            finish();
         }
 
         navController = Navigation.findNavController(this,R.id.nav_host_fragment_activity_launch);
@@ -42,6 +46,7 @@ public class LaunchActivity2 extends AppCompatActivity {
 
 
     }
+
 }
 
 
