@@ -7,4 +7,6 @@ import java.util.ArrayList;
 public interface ListInterface {
     public void setChipData(ArrayList<String> chipNames);
     public void setMealData(ArrayList<Meal> meals);
+
+    void onAddPlan(Meal meal);
 }

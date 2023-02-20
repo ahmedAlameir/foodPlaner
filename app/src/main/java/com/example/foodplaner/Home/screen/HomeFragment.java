@@ -41,6 +41,8 @@ public class HomeFragment extends Fragment implements HomeInterface {
         presenter = new HomePresenter(this,
                 Repository.getInstance( MealClient.getINSTANCE(),getContext())
         ,getContext());
+        binding.mealOfTheDayImage.setOnClickListener(v -> {presenter.sendMealOfTheDay();
+        });
         categoryAdapter = new HomeCategoryAdapter(presenter);
         selectionAdapter = new HomeSelectionAdapter(presenter);
         binding.homeCatList.setNestedScrollingEnabled(false);
@@ -67,5 +69,12 @@ public class HomeFragment extends Fragment implements HomeInterface {
     @Override
     public void setCategoriesInSelectionList(List<Category> categories) {
         categoryAdapter.setList(categories);
+    }
+
+    @Override
+    public void goToMeal(Meal meal) {
+        Intent i = new Intent(getContext(), MealMainScreenActivity.class);
+        i.putExtra("MEAL",meal);
+        startActivity(i);
     }
 }
