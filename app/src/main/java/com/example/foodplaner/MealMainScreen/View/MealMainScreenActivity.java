@@ -96,7 +96,7 @@ public class MealMainScreenActivity extends AppCompatActivity implements MealMai
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);
-                if(VideoUrl[0] !=null){
+                if(VideoUrl[0] !=null&&!VideoUrl[0].isEmpty()&&!VideoUrl[0].equalsIgnoreCase("")){
                     VideoUrl[0] = VideoUrl[0].substring(VideoUrl[0].indexOf("=") + 1);
                     StringTokenizer st = new StringTokenizer(VideoUrl[0], "&");
                     VideoUrl[0] = st.nextToken();
