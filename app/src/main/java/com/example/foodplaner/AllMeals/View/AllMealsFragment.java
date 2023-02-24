@@ -59,6 +59,8 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
 
 
 
+
+
     public AllMealsFragment() {
 
 
@@ -77,6 +79,7 @@ public class AllMealsFragment extends Fragment implements AllMealViewInterface,O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_meals, container, false);
+
 
 
     }

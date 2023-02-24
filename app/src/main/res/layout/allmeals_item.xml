@@ -16,9 +16,19 @@
         android:backgroundTint="#F5F5F5">
 
         <ImageView
+            android:id="@+id/addfav2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/heart_filled" />
+
+        <ImageView
             android:id="@+id/addplan"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="36dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,15 +37,15 @@
 
         <ImageView
             android:id="@+id/addfav"
-            android:clickable="true"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/colored_heart"
-            android:focusable="true" />
+            app:srcCompat="@drawable/colored_heart" />
 
         <TextView
             android:id="@+id/mealarea"
@@ -58,7 +68,8 @@
             android:textColor="#DB9C72"
             android:textColorHint="#DB9C72"
 
-            android:textSize="15sp"
+            android:textSize="20sp"
+            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@+id/addplan"
             app:layout_constraintEnd_toStartOf="@+id/addfav"
             app:layout_constraintStart_toEndOf="@+id/cardView2"
@@ -92,5 +103,6 @@
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/onboardthird" />
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

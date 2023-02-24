@@ -69,7 +69,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         public void bind(Meal item) {
             binding.mealarea.setText(item.strArea);
             binding.mealname.setText(item.strMeal);
-            binding.addfav.setImageResource(R.drawable.trash);
+            binding.addfav.setImageResource(R.drawable.heart_filled);
             binding.addfav.setOnClickListener(v -> {
                 presenter.deleteItem(item);
             });

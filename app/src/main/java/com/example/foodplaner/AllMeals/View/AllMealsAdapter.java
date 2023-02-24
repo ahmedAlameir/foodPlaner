@@ -1,7 +1,6 @@
 package com.example.foodplaner.AllMeals.View;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +57,11 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
         holder.getMealname().setText(current.getStrMeal());
         holder.getMealarea().setText(current.getStrArea());
         Glide.with(context).load(current.getStrMealThumb()).into(holder.getThumbnail());
-        holder.getAddfav().setOnClickListener((view)->{onFavouriteClickListener.onAddFav(current);});
+        holder.getAddfav().setOnClickListener((view)->{onFavouriteClickListener.onAddFav(current);
+            holder.addfav.setVisibility(View.INVISIBLE);
+            holder.addfavfilled.setVisibility(View.VISIBLE);
+
+        });
         holder.getAddplan().setOnClickListener(view -> {onPlanClickListener.onAddPlan(current);});
 
         holder.getLayout().setOnClickListener(view -> {onMealClickListener.OnOpenMeal(current);});
@@ -77,6 +80,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
         ImageView thumbnail;
         ImageView addfav;
         ImageView addplan;
+        ImageView addfavfilled;
         ConstraintLayout layout;
 
 
@@ -109,6 +113,8 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
             addfav=itemView.findViewById(R.id.addfav);
             addplan=itemView.findViewById(R.id.addplan);
             layout=itemView.findViewById(R.id.meal_item_id);
+            addfavfilled=itemView.findViewById(R.id.addfav2);
+            addfavfilled.setVisibility(View.INVISIBLE);
 
 
 

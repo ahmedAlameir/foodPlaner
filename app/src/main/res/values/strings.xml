@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">foodPlaner</string>
+    <string name="app_name">Yum Yum</string>
     <string name="facebook_app_id">738486790965804</string>
     <string name="fb_login_protocol_scheme">fb738486790965804</string>
     <string name="facebook_client_token">82f2a93d1cc0ce7f52da7c66c5202441</string>
     <string name="title_activity_meal_main_screen">MealMainScreen</string>
+    <string name="title"><i>YUM YUM</i></string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -117,6 +118,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

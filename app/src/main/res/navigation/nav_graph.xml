@@ -8,32 +8,32 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.foodplaner.Home.screen.HomeFragment"
-        android:label="HomeFragment"
+        android:label=""
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.foodplaner.List.screen.ListFragment"
-        android:label="ListFragment"
+        android:label=""
         tools:layout="@layout/fragment_list"/>
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.example.foodplaner.Favourite.screen.FavouriteFragment"
-        android:label="fragment_favourite"
+        android:label=""
         tools:layout="@layout/fragment_favourite" />
     <fragment
         android:id="@+id/allMealsFragment"
         android:name="com.example.foodplaner.AllMeals.View.AllMealsFragment"
-        android:label="fragment_all_meals"
+        android:label=""
         tools:layout="@layout/fragment_all_meals" />
     <fragment
         android:id="@+id/myPlanFragment"
         android:name="com.example.foodplaner.MyPlan.View.MyPlanFragment"
-        android:label="fragment_my_plan"
+        android:label=""
         tools:layout="@layout/fragment_my_plan" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.foodplaner.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label=""
         tools:layout="@layout/fragment_profile" />
 
 </navigation>
